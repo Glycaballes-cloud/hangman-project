@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800" prefWidth="1300" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.quentincillierre.hangman.controller.MenuController">
 
@@ -52,35 +51,15 @@
         </ComboBox>
 
         <!-- START -->
-        <Button fx:id="startButton" layoutX="185.0" layoutY="426.0" onAction="#startGame" prefHeight="42.0" prefWidth="264.0" style="                     -fx-background-color:linear-gradient(#D8903C,#A65C1B);                     -fx-text-fill:white;                     -fx-font-size:22;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#5D3412;                     -fx-border-width:4;                     -fx-cursor:hand;" text="START GAME" />
+        <Button fx:id="startButton" layoutX="202.0" layoutY="426.0" onAction="#startGame" prefHeight="55.0" prefWidth="223.0" style="                     -fx-background-color:linear-gradient(#D8903C,#A65C1B);                     -fx-text-fill:white;                     -fx-font-size:22;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#5D3412;                     -fx-border-width:4;                     -fx-cursor:hand;" text="START GAME" />
 
         <!-- Statistics -->
         <Button fx:id="statisticsButton" layoutX="72.0" layoutY="488.0" onAction="#openStatistics" prefHeight="55" prefWidth="161.0" style="                     -fx-background-color:linear-gradient(#A56A2A,#7A4318);                     -fx-text-fill:white;                     -fx-font-size:20;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#5D3412;                     -fx-border-width:4;                     -fx-cursor:hand;" text="STATISTICS" />
         <!-- Exit -->
-        <Button zx:id="exitButton" layoutX="400.0" layoutY="492.0" onAction="#exitGame" prefHeight="51.0" prefWidth="175.0" style="                     -fx-background-color:linear-gradient(#8E2F23,#651B16);                     -fx-text-fill:white;                     -fx-font-size:20;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#3F140D;                     -fx-border-width:4;                     -fx-cursor:hand;" text="EXIT" />
+        <Button fx:id="exitButton" layoutX="400.0" layoutY="492.0" onAction="#exitGame" prefHeight="51.0" prefWidth="175.0" style="                     -fx-background-color:linear-gradient(#8E2F23,#651B16);                     -fx-text-fill:white;                     -fx-font-size:20;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#3F140D;                     -fx-border-width:4;                     -fx-cursor:hand;" text="EXIT" />
         <!-- Leaderboard -->
-       <Button fx:id="leaderboardButton"
-        layoutX="200.0"
-        layoutY="346.0"
-        onAction="#openLeaderboard"
-        prefHeight="55.0"
-        prefWidth="227.0"
-        style="
-            -fx-background-color:linear-gradient(#A56A2A,#7A4318);
-            -fx-text-fill:white;
-            -fx-font-size:20;
-            -fx-font-family:'Rockwell';
-            -fx-font-weight:bold;
-            -fx-background-radius:15;
-            -fx-border-radius:15;
-            -fx-border-color:#5D3412;
-            -fx-border-width:4;
-            -fx-cursor:hand;"
-        text="LEADERBOARD"/>
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
+  <!-- Leaderboard -->
+<Button fx:id="leaderboardButton" layoutX="200.0" layoutY="346.0" onAction="#openLeaderboard" prefHeight="55.0" prefWidth="227.0" style="             -fx-background-color:linear-gradient(#A56A2A,#7A4318);             -fx-text-fill:white;             -fx-font-size:20;             -fx-font-family:'Rockwell';             -fx-font-weight:bold;             -fx-background-radius:15;             -fx-border-radius:15;             -fx-border-color:#5D3412;             -fx-border-width:4;             -fx-cursor:hand;" text="LEADERBOARD" />
    
            <TextField fx:id="playerNameField" layoutX="93.0" layoutY="69.0" prefHeight="46.0" prefWidth="445.0" promptText="Enter your cowboy name..." style="                         -fx-background-color:#FFF5D8;                         -fx-border-color:#8B5A2B;                         -fx-border-width:3;                         -fx-background-radius:12;                         -fx-border-radius:12;                         -fx-font-size:18;                         -fx-font-family:'Rockwell';" />
    

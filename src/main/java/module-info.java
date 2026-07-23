@@ -2,9 +2,9 @@ module fr.quentincillierre.hangman {
 
     // JavaFX Modules
     requires javafx.base;
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.graphics;
+    requires transitive javafx.controls;
+    requires transitive javafx.fxml;
+    requires transitive javafx.graphics;
     requires javafx.media;
 
     // Open packages for FXML

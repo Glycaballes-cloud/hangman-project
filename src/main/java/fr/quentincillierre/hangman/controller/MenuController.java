@@ -212,7 +212,7 @@ addHoverEffect(exitButton);
     // ===========================================
     // Start Game
     // ===========================================
-
+ 
     @FXML
     private void startGame() {
         soundManager.playClick();

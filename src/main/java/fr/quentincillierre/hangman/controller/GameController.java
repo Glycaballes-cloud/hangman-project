@@ -60,9 +60,13 @@
         @FXML private Label resultLabel;
         @FXML private Label hintLabel;
         @FXML private Label playerNameLabel;
+        @FXML
+private ImageView pauseButtonImage;
 
-        @FXML private Button pauseButton;
-        @FXML private Button quitButton;
+@FXML
+private ImageView quitButtonImage;
+
+
 
         @FXML private GridPane keyboardGrid;
 
@@ -118,47 +122,52 @@
         private int score;
         private boolean paused;
         private boolean gameFinished;
+private void addHoverEffect(ImageView image) {
 
-        private void addHoverEffect(Button button) {
-
-        button.setCursor(Cursor.HAND);
-
-        DropShadow glow = new DropShadow();
-        glow.setColor(Color.GOLD);
-        glow.setRadius(20);
-
-        button.setOnMouseEntered(e -> {
-
-            ScaleTransition st =
-                    new ScaleTransition(Duration.millis(150), button);
-
-            st.setToX(1.08);
-            st.setToY(1.08);
-            st.play();
-
-            button.setEffect(glow);
-
-        });
-
-        button.setOnMouseExited(e -> {
-
-            ScaleTransition st =
-                    new ScaleTransition(Duration.millis(150), button);
-
-            st.setToX(1);
-            st.setToY(1);
-            st.play();
-
-            button.setEffect(null);
-
-        });
+    if (image == null) {
+        return;
     }
+
+    image.setCursor(Cursor.HAND);
+
+    DropShadow glow = new DropShadow();
+    glow.setColor(Color.GOLD);
+    glow.setRadius(20);
+
+    image.setOnMouseEntered(e -> {
+
+        ScaleTransition st =
+                new ScaleTransition(Duration.millis(150), image);
+
+        st.setToX(1.08);
+        st.setToY(1.08);
+        st.play();
+
+        image.setEffect(glow);
+
+    });
+
+
+    image.setOnMouseExited(e -> {
+
+        ScaleTransition st =
+                new ScaleTransition(Duration.millis(150), image);
+
+        st.setToX(1);
+        st.setToY(1);
+        st.play();
+
+        image.setEffect(null);
+
+    });
+}
 
         @FXML
         public void initialize() {
 
-            addHoverEffect(pauseButton);
-    addHoverEffect(quitButton);
+       addHoverEffect(pauseButtonImage);
+addHoverEffect(quitButtonImage);
+addHoverEffect(restartButton);
             
 
             timerManager = new TimerManager(currentDifficulty.getTime());
@@ -258,6 +267,8 @@
             loadImage(resultPanelImage, "/pictures/result-panel.jpg");
             loadImage(wrongLettersPanelImage, "/pictures/wrongletters-panel.png");
             loadImage(hintButtonImage, "/pictures/hint-button.png");
+            loadImage(pauseButtonImage, "/pictures/pause-button.png");
+            loadImage(quitButtonImage, "/pictures/quit-button.png");
 
         }
 
@@ -276,52 +287,35 @@
         // BUTTONS
         //==========================
 
-        private void setupButtons() {
+     private void setupButtons() {
 
-            addHoverEffect(restartButton);
-            addHoverEffect(hintButtonImage);
 
-            restartButton.setCursor(Cursor.HAND);
-            hintButtonImage.setCursor(Cursor.HAND);
 
-            restartButton.setOnMouseClicked(e -> {
+    restartButton.setOnMouseClicked(e -> {
         soundManager.playClick();
         restartGame();
     });
 
-        hintButtonImage.setOnMouseClicked(e -> {
+
+    hintButtonImage.setOnMouseClicked(e -> {
         soundManager.playClick();
         useHint();
     });
 
-        }
 
-        private void addHoverEffect(ImageView image) {
+    pauseButtonImage.setOnMouseClicked(e -> {
+        soundManager.playClick();
+        pauseGame();
+    });
 
-            image.setOnMouseEntered(e -> {
 
-                ScaleTransition st =
-                        new ScaleTransition(Duration.millis(150), image);
+    quitButtonImage.setOnMouseClicked(e -> {
+        soundManager.playClick();
+        quitGame();
+    });
 
-                st.setToX(1.1);
-                st.setToY(1.1);
-                st.play();
-
-            });
-
-            image.setOnMouseExited(e -> {
-
-                ScaleTransition st =
-                        new ScaleTransition(Duration.millis(150), image);
-
-                st.setToX(1);
-                st.setToY(1);
-                st.play();
-
-            });
-
-        }
-
+}
+       
         //==========================
         // START GAME
         //==========================
@@ -340,6 +334,10 @@
             gameFinished = false;
             score = 0;
 
+            timerPulse.stop();
+    timerLabel.setScaleX(1);
+    timerLabel.setScaleY(1);
+    timerLabel.setTextFill(Color.WHITE);
             hintManager.reset();
 
             playerNameLabel.setText("Player: " + playerName);
@@ -480,37 +478,73 @@ timerLabel.setTextFill(Color.WHITE);
         // PAUSE
         //==========================
 
-        @FXML
-        private void pauseGame() {
-            soundManager.playClick();
+     @FXML
+private void pauseGame() {
 
-            if (!paused) {
+    if (soundManager != null) {
+        soundManager.playClick();
+    }
 
-                paused = true;
 
-                timerManager.pause();
+    if (!paused) {
 
-                keyboardGrid.setDisable(true);
+        // PAUSE GAME
+        paused = true;
 
-                pauseButton.setText("RESUME");
-
-                resultLabel.setText("⏸ GAME\n PAUSED");
-
-            } else {
-
-                paused = false;
-
-                timerManager.resume();
-
-                keyboardGrid.setDisable(false);
-
-                pauseButton.setText("PAUSE");
-
-                resultLabel.setText("Playing...");
-
-            }
-
+        if (timerManager != null) {
+            timerManager.pause();
         }
+
+        keyboardGrid.setDisable(true);
+
+
+        // Change pause image to resume image
+        loadImage(
+            pauseButtonImage,
+            "/pictures/resume-button.png"
+        );
+
+
+        resultLabel.setText(
+            "⏸ GAME\nPAUSED"
+        );
+
+
+        // Make button slightly transparent
+        pauseButtonImage.setOpacity(0.75);
+
+
+    } else {
+
+
+        // RESUME GAME
+        paused = false;
+
+        if (timerManager != null) {
+            timerManager.resume();
+        }
+
+        keyboardGrid.setDisable(false);
+
+
+        // Change resume image back to pause image
+        loadImage(
+            pauseButtonImage,
+            "/pictures/pause-button.png"
+        );
+
+
+        resultLabel.setText(
+            "Playing..."
+        );
+
+
+        // Restore opacity
+        pauseButtonImage.setOpacity(1.0);
+
+    }
+
+}
 
         //==========================
         // QUIT
@@ -554,7 +588,7 @@ timerLabel.setTextFill(Color.WHITE);
                 Parent root = loader.load();
 
                 Stage stage =
-                        (Stage) quitButton.getScene().getWindow();
+                       (Stage) quitButtonImage.getScene().getWindow();
 
                 stage.setScene(
                         new Scene(root, 1300, 800)
@@ -591,41 +625,35 @@ timerLabel.setTextFill(Color.WHITE);
         // REFRESH UI
         //==========================
 
-        private void refreshUI() {
+     private void refreshUI() {
 
-            timerPulse.stop();
+    if (model == null)
+        return;
 
-timerLabel.setScaleX(1);
-timerLabel.setScaleY(1);
-timerLabel.setTextFill(Color.BLACK);
+    wordLabel.setText(
+            model.getHiddenWord());
 
-            if (model == null)
-                return;
+    wrongLettersLabel.setText(
+            model.getWrongLetters());
 
-            wordLabel.setText(
-                    model.getHiddenWord());
+    int lives =
+            currentDifficulty.getLives()
+                    - model.getCurrentWrongs();
 
-            wrongLettersLabel.setText(
-                    model.getWrongLetters());
+    StringBuilder hearts =
+            new StringBuilder();
 
-            int lives =
-                    currentDifficulty.getLives()
-                            - model.getCurrentWrongs();
+    for (int i = 0; i < lives; i++) {
 
-            StringBuilder hearts =
-                    new StringBuilder();
+        hearts.append("♥ ");
 
-            for (int i = 0; i < lives; i++) {
+    }
 
-                hearts.append("♥ ");
+    livesLabel.setText(
+            hearts.toString());
 
-            }
-
-            livesLabel.setText(
-                    hearts.toString());
-
-        if (model.getCurrentWrongs() >= 4
-            && hintManager.canUseHint()) {
+    if (model.getCurrentWrongs() >= 4
+        && hintManager.canUseHint()) {
 
         hintButtonImage.setVisible(true);
 
@@ -648,36 +676,40 @@ timerLabel.setTextFill(Color.BLACK);
 
         calculateScore();
 
-    if (model.isWin()) {
+        if (model.isWin()) {
 
-        animationManager.jump(hangmanImageView);
+            animationManager.jump(hangmanImageView);
 
-        soundManager.playWin();
+            soundManager.playWin();
 
-        resultLabel.setText(
-                "🎉 VICTORY!\n\nScore: " + score);
+            resultLabel.setText(
+                    "🎉 VICTORY!\n\nScore: " + score);
 
-        saveGameStats(true);
+            saveGameStats(true);
 
         } else {
 
-        animationManager.swing(hangmanImageView);
+            animationManager.swing(hangmanImageView);
 
-        soundManager.playLose();
+            soundManager.playLose();
 
-        resultLabel.setText(
-                "💀 GAME\n OVER!\n\nScore: " + score);
+            resultLabel.setText(
+                    "💀 GAME\n OVER!\n\nScore: " + score);
 
-        saveGameStats(false);
+            saveGameStats(false);
 
-    }
+        }
+
+        // game just ended — stop the timer pulse/red warning
+        timerPulse.stop();
+
     } else {
 
         uiManager.updateHangmanImage(model);
 
     }
 
-        }    //==========================
+}    //==========================
         // SCORE
         //==========================
 
@@ -746,9 +778,9 @@ timerLabel.setTextFill(Color.BLACK);
 
             );
 
-            if (playerStats.getBestTime() == 0
+                if (playerStats.getBestTime() == 0
                     || timerManager.getTimeRemaining()
-                    > playerStats.getBestTime()) {
+                    >= playerStats.getBestTime()) {
 
                 playerStats.setBestTime(
 
