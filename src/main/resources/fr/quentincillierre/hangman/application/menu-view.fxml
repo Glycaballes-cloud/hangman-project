@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800" prefWidth="1300" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.quentincillierre.hangman.controller.MenuController">
+
+    <!-- Background -->
+    <ImageView fx:id="backgroundImage" fitHeight="800" fitWidth="1300" preserveRatio="false" />
+
+    <!-- Wooden Menu Panel -->
+    <AnchorPane layoutX="333.0" layoutY="138.0" prefHeight="582.0" prefWidth="639.0" style="                     -fx-background-color: linear-gradient(#F6D69B,#D49B55);                     -fx-background-radius:30;                     -fx-border-color:#6B3E16;                     -fx-border-width:8;                     -fx-border-radius:30;                     -fx-effect:dropshadow(gaussian, rgba(0,0,0,.45),20,0,5,5);">
+
+        <!-- Category -->
+        <Label layoutX="213.0" layoutY="127.0" style="                     -fx-font-size:24;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-text-fill:#4A2508;" text="🌵 CATEGORY" />
+
+        <ComboBox fx:id="categoryComboBox" layoutX="167.0" layoutY="186.0" prefHeight="39.0" prefWidth="289.0" style="                         -fx-font-size:18;                         -fx-font-family:'Rockwell';                         -fx-background-radius:12;                         -fx-border-radius:12;">
+
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Random" />
+                    <String fx:value="Animals" />
+                    <String fx:value="Technology" />
+                    <String fx:value="Fruits" />
+                    <String fx:value="Countries" />
+                    <String fx:value="Sports" />
+                </FXCollections>
+            </items>
+
+        </ComboBox>
+
+        <!-- Difficulty -->
+        <Label layoutX="213.0" layoutY="238.0" style="                     -fx-font-size:24;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-text-fill:#4A2508;" text="⭐ DIFFICULTY" />
+
+        <ComboBox fx:id="difficultyComboBox" layoutX="170.0" layoutY="288.0" prefWidth="280" style="                         -fx-font-size:18;                         -fx-font-family:'Rockwell';                         -fx-background-radius:12;                         -fx-border-radius:12;">
+
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Easy" />
+                    <String fx:value="Medium" />
+                    <String fx:value="Hard" />
+                </FXCollections>
+            </items>
+
+        </ComboBox>
+
+        <!-- START -->
+        <Button fx:id="startButton" layoutX="185.0" layoutY="426.0" onAction="#startGame" prefHeight="42.0" prefWidth="264.0" style="                     -fx-background-color:linear-gradient(#D8903C,#A65C1B);                     -fx-text-fill:white;                     -fx-font-size:22;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#5D3412;                     -fx-border-width:4;                     -fx-cursor:hand;" text="START GAME" />
+
+        <!-- Statistics -->
+        <Button fx:id="statisticsButton" layoutX="72.0" layoutY="488.0" onAction="#openStatistics" prefHeight="55" prefWidth="161.0" style="                     -fx-background-color:linear-gradient(#A56A2A,#7A4318);                     -fx-text-fill:white;                     -fx-font-size:20;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#5D3412;                     -fx-border-width:4;                     -fx-cursor:hand;" text="STATISTICS" />
+        <!-- Exit -->
+        <Button zx:id="exitButton" layoutX="400.0" layoutY="492.0" onAction="#exitGame" prefHeight="51.0" prefWidth="175.0" style="                     -fx-background-color:linear-gradient(#8E2F23,#651B16);                     -fx-text-fill:white;                     -fx-font-size:20;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-background-radius:15;                     -fx-border-radius:15;                     -fx-border-color:#3F140D;                     -fx-border-width:4;                     -fx-cursor:hand;" text="EXIT" />
+        <!-- Leaderboard -->
+       <Button fx:id="leaderboardButton"
+        layoutX="200.0"
+        layoutY="346.0"
+        onAction="#openLeaderboard"
+        prefHeight="55.0"
+        prefWidth="227.0"
+        style="
+            -fx-background-color:linear-gradient(#A56A2A,#7A4318);
+            -fx-text-fill:white;
+            -fx-font-size:20;
+            -fx-font-family:'Rockwell';
+            -fx-font-weight:bold;
+            -fx-background-radius:15;
+            -fx-border-radius:15;
+            -fx-border-color:#5D3412;
+            -fx-border-width:4;
+            -fx-cursor:hand;"
+        text="LEADERBOARD"/>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   
+           <TextField fx:id="playerNameField" layoutX="93.0" layoutY="69.0" prefHeight="46.0" prefWidth="445.0" promptText="Enter your cowboy name..." style="                         -fx-background-color:#FFF5D8;                         -fx-border-color:#8B5A2B;                         -fx-border-width:3;                         -fx-background-radius:12;                         -fx-border-radius:12;                         -fx-font-size:18;                         -fx-font-family:'Rockwell';" />
+   
+        <!-- Player Name -->
+        <Label layoutX="213.0" layoutY="17.0" prefHeight="35.0" prefWidth="276.0" style="                     -fx-font-size:24;                     -fx-font-family:'Rockwell';                     -fx-font-weight:bold;                     -fx-text-fill:#4A2508;" text="🤠 PLAYER NAME" />
+
+
+        
+    </AnchorPane>
+
+          <!-- Title -->
+    <ImageView fx:id="titleImage" fitHeight="188.0" fitWidth="527.0" layoutX="485.0" layoutY="4.0" preserveRatio="true" />
+
+</AnchorPane>

@@ -1,0 +1,198 @@
+/* =========================================
+   COWBOY / WESTERN HANGMAN THEME
+   ========================================= */
+
+
+/* Whole application */
+.root {
+    -fx-font-family: "Georgia";
+}
+
+
+/* =========================================
+   SHERIFF TITLE
+   ========================================= */
+
+.title-label {
+
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+
+    -fx-text-fill: #D4AF37;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        black,
+        5,
+        0.5,
+        3,
+        3
+    );
+}
+
+
+/* =========================================
+   RECORDS / STATISTICS
+   ========================================= */
+
+.stat-label {
+
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+
+    -fx-text-fill: #FFF1C1;
+
+    -fx-background-color: #5C3317;
+
+    -fx-padding: 12px 25px;
+
+    -fx-background-radius: 8;
+
+    -fx-border-color: #D4AF37;
+
+    -fx-border-width: 3;
+
+    -fx-border-radius: 8;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        black,
+        6,
+        0.5,
+        3,
+        3
+    );
+}
+
+
+/* =========================================
+   WESTERN BUTTON STYLE
+   ========================================= */
+
+.back-button {
+
+    -fx-background-color: linear-gradient(
+        #B87333,
+        #6B3E1E
+    );
+
+    -fx-text-fill: #FFF8DC;
+
+    -fx-font-size: 20px;
+
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 20;
+
+    -fx-border-color: #D4AF37;
+
+    -fx-border-width: 3;
+
+    -fx-border-radius: 20;
+
+    -fx-cursor: hand;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        black,
+        5,
+        0.5,
+        2,
+        3
+    );
+}
+
+
+/* Button hover */
+
+.back-button:hover {
+
+    -fx-background-color: #D4AF37;
+
+    -fx-text-fill: #3B1F0B;
+
+    -fx-scale-x: 1.1;
+
+    -fx-scale-y: 1.1;
+}
+
+
+/* Button pressed */
+
+.back-button:pressed {
+
+    -fx-background-color: #6B3E1E;
+
+}
+
+
+/* =========================================
+   EXIT CONFIRMATION ALERT
+   ========================================= */
+
+.dialog-pane {
+
+    -fx-background-color: #E8C99B;
+
+    -fx-border-color: #6B3E1E;
+
+    -fx-border-width: 4;
+
+}
+
+
+/* Alert header */
+
+.dialog-pane .header-panel {
+
+    -fx-background-color: #6B3E1E;
+
+}
+
+
+.dialog-pane .header-panel .label {
+
+    -fx-text-fill: #FFD700;
+
+    -fx-font-size: 24px;
+
+    -fx-font-weight: bold;
+
+}
+
+
+/* Alert text */
+
+.dialog-pane .content {
+
+    -fx-text-fill: #3B1F0B;
+
+    -fx-font-size: 18px;
+
+}
+
+
+/* Alert buttons */
+
+.dialog-pane .button {
+
+    -fx-background-color: #8B4513;
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 16px;
+
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 15;
+
+}
+
+
+.dialog-pane .button:hover {
+
+    -fx-background-color: #D4AF37;
+
+    -fx-text-fill: black;
+
+}
