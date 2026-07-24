@@ -150,7 +150,7 @@
     <Label fx:id="overlayInfo" alignment="CENTER" layoutX="420" layoutY="340" prefHeight="140" prefWidth="460" style="-fx-font-size:28;                   -fx-font-weight:bold;                   -fx-text-fill:#4A2B08;" wrapText="true" />
 
     <!-- Continue -->
-    <ImageView fx:id="continueButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="495" pickOnBounds="true" preserveRatio="true" visible="false" />
+    <ImageView fx:id="continueButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="385" pickOnBounds="true" preserveRatio="true" visible="false" />
 
     <!-- Play Again -->
     <ImageView fx:id="playAgainButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="495" pickOnBounds="true" preserveRatio="true" visible="false" />

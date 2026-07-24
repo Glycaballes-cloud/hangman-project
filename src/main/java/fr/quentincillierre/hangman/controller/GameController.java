@@ -309,19 +309,13 @@ public void initialize() {
             loadImage(quitButtonImage, "/pictures/quit-button.png");
 
         }
-       private void showPauseOverlay() {
-
+      private void showPauseOverlay() {
     overlayPane.setVisible(true);
-
-    loadImage(
-            overlayImage,
-            "/pictures/pause-overlay.png"
-    );
-
+    loadImage(overlayImage, "/pictures/pause-overlay.png");
+    playAgainButtonImage.setVisible(false);
     continueButtonImage.setVisible(true);
     restartOverlayButtonImage.setVisible(true);
     leaveTownButtonImage.setVisible(true);
-
 }
 private void showVictoryOverlay() {
 
@@ -539,7 +533,6 @@ private void hideOverlay() {
 
             keyboardGrid.setDisable(false);
 
-            resultLabel.setText("Playing...");
             hintLabel.setText("");
 
             hintButtonImage.setVisible(false);
@@ -596,8 +589,6 @@ private void hideOverlay() {
                 overlayInfo.setText(
         "The Word Was:\n"
         + model.getWordToGuess()
-        + "\n\nScore: "
-        + score
 );
 
                 showTimeUpOverlay();
@@ -842,10 +833,7 @@ private void pauseGame() {
 
             soundManager.playWin();
 
-            overlayInfo.setText(
-        "Score: " + score
-);
-
+       
             showVictoryOverlay();
 
             saveGameStats(true);
@@ -859,8 +847,7 @@ private void pauseGame() {
     overlayInfo.setText(
         "The Word Was:\n"
         + model.getWordToGuess()
-        + "\n\nScore: "
-        + score
+      
 );
 
     showGameOverOverlay();
@@ -946,9 +933,9 @@ private void pauseGame() {
 
             );
 
-                if (playerStats.getBestTime() == 0
+             if (won && (playerStats.getBestTime() == 0
                     || timerManager.getTimeRemaining()
-                    >= playerStats.getBestTime()) {
+                    >= playerStats.getBestTime()) ){
 
                 playerStats.setBestTime(
 
