@@ -3,8 +3,8 @@
     import java.net.URL;
     import java.util.Optional;
 
-    import fr.quentincillierre.hangman.model.Category;
-    import fr.quentincillierre.hangman.model.Difficulty;
+import fr.quentincillierre.hangman.model.Category;
+import fr.quentincillierre.hangman.model.Difficulty;
     import fr.quentincillierre.hangman.model.GameState;
     import fr.quentincillierre.hangman.model.HangmanModel;
     import fr.quentincillierre.hangman.model.PlayerStats;
@@ -26,10 +26,11 @@
     import javafx.scene.effect.DropShadow;
     import javafx.scene.image.Image;
     import javafx.scene.image.ImageView;
+    import javafx.scene.layout.AnchorPane;
     import javafx.scene.layout.GridPane;
     import javafx.scene.paint.Color;
-    import javafx.stage.Stage;
-    import javafx.util.Duration;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
     public class GameController {
 
@@ -44,6 +45,30 @@
         @FXML private ImageView livesPanelImage;
         @FXML private ImageView restartButton;
         @FXML private ImageView resultPanelImage;
+        @FXML
+private ImageView restartOverlayButtonImage;
+
+        @FXML
+private AnchorPane overlayPane;
+
+@FXML
+private ImageView overlayImage;
+
+
+
+@FXML
+private Label overlayInfo;
+
+@FXML
+private ImageView continueButtonImage;
+
+@FXML
+private ImageView playAgainButtonImage;
+
+@FXML
+private ImageView leaveTownButtonImage;
+
+
         @FXML private ImageView hangmanImageView;
         @FXML private ImageView wrongLettersPanelImage;
         @FXML private ImageView hintButtonImage;
@@ -123,7 +148,7 @@ private ImageView quitButtonImage;
         private boolean paused;
         private boolean gameFinished;
 private void addHoverEffect(ImageView image) {
-
+    
     if (image == null) {
         return;
     }
@@ -136,6 +161,8 @@ private void addHoverEffect(ImageView image) {
 
     image.setOnMouseEntered(e -> {
 
+        soundManager.playHover();
+
         ScaleTransition st =
                 new ScaleTransition(Duration.millis(150), image);
 
@@ -146,7 +173,11 @@ private void addHoverEffect(ImageView image) {
         image.setEffect(glow);
 
     });
-
+    restartOverlayButtonImage.setOnMouseClicked(e -> {
+    soundManager.playClick();
+    hideOverlay();
+    restartGame();
+});
 
     image.setOnMouseExited(e -> {
 
@@ -162,21 +193,25 @@ private void addHoverEffect(ImageView image) {
     });
 }
 
-        @FXML
-        public void initialize() {
+@FXML
+public void initialize() {
 
-       addHoverEffect(pauseButtonImage);
-addHoverEffect(quitButtonImage);
-addHoverEffect(restartButton);
-            
+    soundManager = new SoundManager();
 
-            timerManager = new TimerManager(currentDifficulty.getTime());
-            keyboardManager = new KeyboardManager(keyboardGrid);
-            hintManager = new HintManager();
-            scoreManager = new ScoreManager();
-            soundManager = new SoundManager();
-        soundManager.playBackground();
-        timerPulse = animationManager.pulse(timerLabel);
+    addHoverEffect(pauseButtonImage);
+    addHoverEffect(quitButtonImage);
+    addHoverEffect(restartButton);
+    addHoverEffect(hintButtonImage);
+
+    timerManager = new TimerManager(currentDifficulty.getTime());
+    keyboardManager = new KeyboardManager(keyboardGrid);
+    hintManager = new HintManager();
+    scoreManager = new ScoreManager();
+
+    soundManager.playBackground();
+
+    timerPulse = animationManager.pulse(timerLabel);
+
     uiManager = new UIManager(
             wordLabel,
             wrongLettersLabel,
@@ -187,15 +222,21 @@ addHoverEffect(restartButton);
             categoryLabel,
             hangmanImageView
     );
-            gameState = new GameState();
 
-            loadImages();
+    gameState = new GameState();
 
-            setupButtons();
+    loadImages();
 
-            paused = false;
-            gameFinished = false;
-        }
+    setupButtons();
+
+    paused = false;
+    gameFinished = false;
+    continueButtonImage.setVisible(false);
+    continueButtonImage.setVisible(false);
+restartOverlayButtonImage.setVisible(false);
+leaveTownButtonImage.setVisible(false);
+playAgainButtonImage.setVisible(false);
+}
 
         //==========================
         // SETTERS
@@ -258,7 +299,10 @@ addHoverEffect(restartButton);
         //==========================
 
         private void loadImages() {
-
+            loadImage(playAgainButtonImage, "/pictures/playagain-button.png");
+            loadImage(restartOverlayButtonImage, "/pictures/restart-panel.png");
+                loadImage(leaveTownButtonImage, "/pictures/leave-town-button.png");
+            loadImage(continueButtonImage, "/pictures/continue-button.png");
             loadImage(backgroundImage, "/pictures/background.png");
             loadImage(titleImage, "/pictures/hangman-title.png");
             loadImage(timerPanelImage, "/pictures/timer-panel.png");
@@ -271,7 +315,75 @@ addHoverEffect(restartButton);
             loadImage(quitButtonImage, "/pictures/quit-button.png");
 
         }
+       private void showPauseOverlay() {
 
+    overlayPane.setVisible(true);
+
+    loadImage(
+            overlayImage,
+            "/pictures/pause-overlay.png"
+    );
+
+    continueButtonImage.setVisible(true);
+    restartOverlayButtonImage.setVisible(true);
+    leaveTownButtonImage.setVisible(true);
+
+}
+private void showVictoryOverlay() {
+
+    overlayPane.setVisible(true);
+
+    loadImage(
+            overlayImage,
+            "/pictures/victory-overlay.png"
+    );
+
+    continueButtonImage.setVisible(false);
+    restartOverlayButtonImage.setVisible(false);
+
+    playAgainButtonImage.setVisible(true);
+    leaveTownButtonImage.setVisible(true);
+
+}
+private void showGameOverOverlay() {
+
+    overlayPane.setVisible(true);
+
+    loadImage(
+            overlayImage,
+            "/pictures/gameover-overlay.png"
+    );
+
+    continueButtonImage.setVisible(false);
+    restartOverlayButtonImage.setVisible(false);
+
+    playAgainButtonImage.setVisible(true);
+    leaveTownButtonImage.setVisible(true);
+}
+private void showTimeUpOverlay() {
+
+    overlayPane.setVisible(true);
+
+    loadImage(
+            overlayImage,
+            "/pictures/timeout-overlay.png"
+    );
+
+    continueButtonImage.setVisible(false);
+    restartOverlayButtonImage.setVisible(false);
+
+    playAgainButtonImage.setVisible(true);
+    leaveTownButtonImage.setVisible(true);
+}
+private void hideOverlay() {
+
+    overlayPane.setVisible(false);
+
+    continueButtonImage.setVisible(false);
+    restartOverlayButtonImage.setVisible(false);
+    leaveTownButtonImage.setVisible(false);
+
+}
         private void loadImage(ImageView imageView, String path) {
 
             URL url = getClass().getResource(path);
@@ -288,14 +400,47 @@ addHoverEffect(restartButton);
         //==========================
 
      private void setupButtons() {
+        
+        playAgainButtonImage.setOnMouseClicked(e -> {
 
+    soundManager.playClick();
 
+    hideOverlay();
 
-    restartButton.setOnMouseClicked(e -> {
-        soundManager.playClick();
-        restartGame();
-    });
+    restartGame();
 
+});
+        leaveTownButtonImage.setOnMouseClicked(e -> {
+
+    soundManager.playClick();
+
+    hideOverlay();
+
+    quitGame();
+
+});
+        restartOverlayButtonImage.setOnMouseClicked(e -> {
+
+    soundManager.playClick();
+
+    hideOverlay();
+
+    restartGame();
+
+});
+
+        continueButtonImage.setOnMouseClicked(e -> {
+
+    soundManager.playClick();
+
+    pauseGame();
+
+});
+
+   restartButton.setOnMouseClicked(e -> {
+    soundManager.playClick();
+    showRestartOverlay();
+});
 
     hintButtonImage.setOnMouseClicked(e -> {
         soundManager.playClick();
@@ -315,7 +460,26 @@ addHoverEffect(restartButton);
     });
 
 }
-       
+       private void showRestartOverlay() {
+
+    overlayPane.setVisible(true);
+
+    loadImage(
+        overlayImage,
+        "/pictures/restart-overlay.png"
+    );
+
+    overlayInfo.setText(
+        "Are you sure?\n\nYour current progress will be lost."
+    );
+
+    continueButtonImage.setVisible(false);
+    playAgainButtonImage.setVisible(false);
+
+    restartOverlayButtonImage.setVisible(true);
+    leaveTownButtonImage.setVisible(true);
+}
+
         //==========================
         // START GAME
         //==========================
@@ -337,7 +501,7 @@ addHoverEffect(restartButton);
             timerPulse.stop();
     timerLabel.setScaleX(1);
     timerLabel.setScaleY(1);
-    timerLabel.setTextFill(Color.WHITE);
+    timerLabel.setTextFill(Color.BLACK);
             hintManager.reset();
 
             playerNameLabel.setText("Player: " + playerName);
@@ -435,11 +599,20 @@ addHoverEffect(restartButton);
 
                 calculateScore();
 
-                resultLabel.setText(
-                    "⏰ TIME'S UP!\n\nScore: " + score
-                );
+              showTimeUpOverlay();
 
-                saveGameStats(false);
+
+
+overlayInfo.setText(
+        "The Word Was:\n"
+        + model.getWordToGuess()
+        + "\n\nScore: "
+        + score
+);
+
+showTimeUpOverlay();
+
+saveGameStats(false);
             }
         }
     );
@@ -464,7 +637,7 @@ addHoverEffect(restartButton);
 
 timerLabel.setScaleX(1);
 timerLabel.setScaleY(1);
-timerLabel.setTextFill(Color.WHITE);
+timerLabel.setTextFill(Color.BROWN);
 
         animationManager.fadeOut(hangmanImageView);
 
@@ -496,7 +669,7 @@ private void pauseGame() {
         }
 
         keyboardGrid.setDisable(true);
-
+        showPauseOverlay();
 
         // Change pause image to resume image
         loadImage(
@@ -505,9 +678,9 @@ private void pauseGame() {
         );
 
 
-        resultLabel.setText(
-            "⏸ GAME\nPAUSED"
-        );
+
+overlayInfo.setText("");
+showPauseOverlay();
 
 
         // Make button slightly transparent
@@ -525,6 +698,7 @@ private void pauseGame() {
         }
 
         keyboardGrid.setDisable(false);
+        hideOverlay();
 
 
         // Change resume image back to pause image
@@ -534,9 +708,10 @@ private void pauseGame() {
         );
 
 
-        resultLabel.setText(
-            "Playing..."
-        );
+       
+overlayInfo.setText("");
+
+hideOverlay();
 
 
         // Restore opacity
@@ -681,24 +856,38 @@ private void pauseGame() {
             animationManager.jump(hangmanImageView);
 
             soundManager.playWin();
+            showVictoryOverlay();
 
-            resultLabel.setText(
-                    "🎉 VICTORY!\n\nScore: " + score);
+      
+
+overlayInfo.setText(
+        "Score: " + score
+);
+
+showVictoryOverlay();
 
             saveGameStats(true);
 
         } else {
 
-            animationManager.swing(hangmanImageView);
+    animationManager.swing(hangmanImageView);
 
-            soundManager.playLose();
+    soundManager.playLose();
 
-            resultLabel.setText(
-                    "💀 GAME\n OVER!\n\nScore: " + score);
+    showGameOverOverlay();
 
-            saveGameStats(false);
 
-        }
+overlayInfo.setText(
+        "The Word Was:\n"
+        + model.getWordToGuess()
+        + "\n\nScore: "
+        + score
+);
+
+showGameOverOverlay();
+    saveGameStats(false);
+
+}
 
         // game just ended — stop the timer pulse/red warning
         timerPulse.stop();

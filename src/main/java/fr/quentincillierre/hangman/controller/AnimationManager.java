@@ -50,7 +50,7 @@ public class AnimationManager {
 
         SequentialTransition sequence = new SequentialTransition(out, in);
 
-        sequence.setOnFinished(e -> label.setTextFill(Color.WHITE));
+        sequence.setOnFinished(e -> label.setTextFill(Color.BLACK));
 
         sequence.play();
     }

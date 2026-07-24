@@ -8,14 +8,14 @@ public class SoundManager {
 
     private MediaPlayer backgroundMusic;
 
-    private AudioClip hover;
-    private AudioClip click;
-    private AudioClip correct;
-    private AudioClip wrong;
-    private AudioClip win;
-    private AudioClip lose;
-    private AudioClip timer;
-    private AudioClip pause;
+    private final AudioClip hover;
+    private final AudioClip click;
+    private final AudioClip correct;
+    private final AudioClip wrong;
+    private final AudioClip win;
+    private final AudioClip lose;
+    private final AudioClip timer;
+    private final AudioClip pause;
 
     public SoundManager() {
 
@@ -41,50 +41,55 @@ public class SoundManager {
 
             System.out.println("Missing sound: " + path);
             return null;
-
         }
-
     }
 
-    // -------------------------
-    // Sound Effects
-    // -------------------------
+    // =====================================
+    // SOUND EFFECTS
+    // =====================================
 
     public void playHover() {
-        if (hover != null) hover.play();
+        playClip(hover);
     }
 
     public void playClick() {
-        if (click != null) click.play();
+        playClip(click);
     }
 
     public void playCorrect() {
-        if (correct != null) correct.play();
+        playClip(correct);
     }
 
     public void playWrong() {
-        if (wrong != null) wrong.play();
+        playClip(wrong);
     }
 
     public void playWin() {
-        if (win != null) win.play();
+        playClip(win);
     }
 
     public void playLose() {
-        if (lose != null) lose.play();
+        playClip(lose);
     }
 
     public void playTimer() {
-        if (timer != null) timer.play();
+        playClip(timer);
     }
 
     public void playPause() {
-        if (pause != null) pause.play();
+        playClip(pause);
     }
 
-    // -------------------------
-    // Background Music
-    // -------------------------
+    private void playClip(AudioClip clip) {
+
+        if (clip != null) {
+            clip.play(1.0); // Full volume
+        }
+    }
+
+    // =====================================
+    // BACKGROUND MUSIC
+    // =====================================
 
     public void playBackground() {
 
@@ -102,21 +107,24 @@ public class SoundManager {
                 backgroundMusic.setVolume(0.35);
             }
 
-            backgroundMusic.play();
+            if (backgroundMusic.getStatus() != MediaPlayer.Status.PLAYING) {
+                backgroundMusic.play();
+            }
 
         } catch (Exception e) {
 
             System.out.println("Background music not found.");
-
+            e.printStackTrace();
         }
     }
 
     public void pauseBackground() {
 
-        if (backgroundMusic != null) {
+        if (backgroundMusic != null
+                && backgroundMusic.getStatus() == MediaPlayer.Status.PLAYING) {
+
             backgroundMusic.pause();
         }
-
     }
 
     public void stopBackground() {
@@ -124,14 +132,6 @@ public class SoundManager {
         if (backgroundMusic != null) {
             backgroundMusic.stop();
         }
-
-    }
-
-    public boolean isBackgroundPlaying() {
-
-        return backgroundMusic != null
-                && backgroundMusic.getStatus() == MediaPlayer.Status.PLAYING;
-
     }
 
     public void toggleBackground() {
@@ -148,12 +148,16 @@ public class SoundManager {
         }
     }
 
+    public boolean isBackgroundPlaying() {
+
+        return backgroundMusic != null
+                && backgroundMusic.getStatus() == MediaPlayer.Status.PLAYING;
+    }
+
     public void setBackgroundVolume(double volume) {
 
         if (backgroundMusic != null) {
             backgroundMusic.setVolume(volume);
         }
-
     }
-
 }

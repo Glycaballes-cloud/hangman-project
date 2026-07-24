@@ -2,7 +2,7 @@ package fr.quentincillierre.hangman.model;
 
 public enum Difficulty {
 
-    EASY(90, 10, 2, 100),
+    EASY(90, 10, 1, 100),
     MEDIUM(60, 8, 1, 200),
     HARD(30, 6, 0, 300);
 

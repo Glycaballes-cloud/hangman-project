@@ -31,8 +31,6 @@
 
    <ImageView fx:id="pauseButtonImage" fitHeight="113.0" fitWidth="221.0" layoutX="1040" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
 
-<ImageView fx:id="quitButtonImage" fitHeight="126.0" fitWidth="226.0" layoutX="1040" layoutY="117.0" pickOnBounds="true" preserveRatio="true" />
-
 
     <!-- KEYBOARD -->
 
@@ -83,9 +81,8 @@
 <ImageView fx:id="hangmanImageView" fitHeight="350" fitWidth="300" layoutX="399.0" layoutY="45.0" preserveRatio="true" />
    
    
-   
-   
-   
+
+ 
    
    
        <!-- HINT IMAGE BUTTON -->
@@ -117,22 +114,15 @@
 
        <ImageView fx:id="restartButton" fitHeight="111.0" fitWidth="215.0" layoutX="1044.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
 
-   
+ 
    
    
    
    
    
        <!-- RESULT PANEL -->
-
-       <ImageView fx:id="resultPanelImage" fitHeight="252.0" fitWidth="303.0" layoutX="-35.0" layoutY="440.0" preserveRatio="true" />
-
-
-
-    <Label fx:id="resultLabel" alignment="CENTER" layoutX="-12.0" layoutY="520.0" prefHeight="16.0" prefWidth="211.0" style="            -fx-font-size:22;            -fx-font-weight:bold;            -fx-text-fill:#5B2D0B;" text="Playing..." wrapText="true" />
-
-
-
+            <ImageView fx:id="resultPanelImage" fitHeight="300.0" fitWidth="400.0" layoutX="450.0" layoutY="200.0" preserveRatio="true" visible="false" />
+               <Label fx:id="resultLabel" alignment="CENTER" layoutX="450.0" layoutY="200.0" prefHeight="300.0" prefWidth="400.0" style="                -fx-font-size:24;                -fx-font-weight:bold;                -fx-text-fill:#4A2B08;" wrapText="true" />
     <!-- TITLE -->
     <ImageView fx:id="titleImage" fitHeight="201.0" fitWidth="864.0" layoutX="442.0" layoutY="15.0" preserveRatio="true" />
 
@@ -143,4 +133,35 @@
 
                   <Label fx:id="playerNameLabel" layoutX="748.0" layoutY="133.0" prefWidth="220" style="-fx-font-size:22;               -fx-font-weight:bold;               -fx-text-fill:#5B2D0B;" text="Player: Guest" />
 
+                  <!-- ========================= -->
+<!-- ========================= -->
+<!-- GAME OVERLAY -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- GAME OVERLAY -->
+<!-- ========================= -->
+
+<AnchorPane fx:id="overlayPane" layoutX="0" layoutY="0" prefHeight="800" prefWidth="1300" style="-fx-background-color: rgba(0,0,0,0.60);" visible="false">
+
+    <!-- Overlay Background -->
+    <ImageView fx:id="overlayImage" fitHeight="900" fitWidth="900" layoutX="200" layoutY="-20" preserveRatio="true" />
+
+    <!-- Overlay Message -->
+    <Label fx:id="overlayInfo" alignment="CENTER" layoutX="420" layoutY="340" prefHeight="140" prefWidth="460" style="-fx-font-size:28;                   -fx-font-weight:bold;                   -fx-text-fill:#4A2B08;" wrapText="true" />
+
+    <!-- Continue -->
+    <ImageView fx:id="continueButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="495" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+    <!-- Play Again -->
+    <ImageView fx:id="playAgainButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="495" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+    <!-- Restart (Confirmation YES) -->
+    <ImageView fx:id="restartOverlayButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="495" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+    <!-- Leave Town -->
+    <ImageView fx:id="leaveTownButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="605" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+</AnchorPane>
+
+<ImageView fx:id="quitButtonImage" fitHeight="126.0" fitWidth="226.0" layoutX="1040" layoutY="117.0" pickOnBounds="true" preserveRatio="true" />
 </AnchorPane>
