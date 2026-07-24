@@ -457,9 +457,6 @@ private void hideOverlay() {
         "/pictures/restart-overlay.png"
     );
 
-    overlayInfo.setText(
-        "Are you sure?\n\nYour current progress will be lost."
-    );
 
     continueButtonImage.setVisible(false);
     playAgainButtonImage.setVisible(false);

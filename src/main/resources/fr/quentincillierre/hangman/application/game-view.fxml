@@ -42,6 +42,8 @@
          <RowConstraints />
       </rowConstraints></GridPane>
 
+      <ImageView fx:id="quitButtonImage" fitHeight="126.0" fitWidth="226.0" layoutX="1066.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+
    
    
        <Label fx:id="livesLabel" alignment="CENTER" layoutX="37.0" layoutY="251.0" prefHeight="70.0" prefWidth="171.0" style="            -fx-font-size:20;            -fx-font-weight:bold;            -fx-text-fill:red;" wrapText="true" />
@@ -162,6 +164,4 @@
     <ImageView fx:id="leaveTownButtonImage" fitHeight="95" fitWidth="260" layoutX="520" layoutY="605" pickOnBounds="true" preserveRatio="true" visible="false" />
 
 </AnchorPane>
-
-<ImageView fx:id="quitButtonImage" fitHeight="126.0" fitWidth="226.0" layoutX="1040" layoutY="117.0" pickOnBounds="true" preserveRatio="true" />
 </AnchorPane>
