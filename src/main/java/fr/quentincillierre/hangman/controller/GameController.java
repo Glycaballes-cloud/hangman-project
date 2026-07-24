@@ -173,11 +173,6 @@ private void addHoverEffect(ImageView image) {
         image.setEffect(glow);
 
     });
-    restartOverlayButtonImage.setOnMouseClicked(e -> {
-    soundManager.playClick();
-    hideOverlay();
-    restartGame();
-});
 
     image.setOnMouseExited(e -> {
 
@@ -232,10 +227,9 @@ public void initialize() {
     paused = false;
     gameFinished = false;
     continueButtonImage.setVisible(false);
-    continueButtonImage.setVisible(false);
-restartOverlayButtonImage.setVisible(false);
-leaveTownButtonImage.setVisible(false);
-playAgainButtonImage.setVisible(false);
+    restartOverlayButtonImage.setVisible(false);
+    leaveTownButtonImage.setVisible(false);
+    playAgainButtonImage.setVisible(false);
 }
 
         //==========================
@@ -599,18 +593,14 @@ private void hideOverlay() {
 
                 calculateScore();
 
-              showTimeUpOverlay();
-
-
-
-overlayInfo.setText(
+                overlayInfo.setText(
         "The Word Was:\n"
         + model.getWordToGuess()
         + "\n\nScore: "
         + score
 );
 
-showTimeUpOverlay();
+                showTimeUpOverlay();
 
 saveGameStats(false);
             }
@@ -677,10 +667,7 @@ private void pauseGame() {
             "/pictures/resume-button.png"
         );
 
-
-
-overlayInfo.setText("");
-showPauseOverlay();
+        overlayInfo.setText("");
 
 
         // Make button slightly transparent
@@ -707,11 +694,9 @@ showPauseOverlay();
             "/pictures/pause-button.png"
         );
 
+        overlayInfo.setText("");
 
-       
-overlayInfo.setText("");
-
-hideOverlay();
+        hideOverlay();
 
 
         // Restore opacity
@@ -856,15 +841,12 @@ hideOverlay();
             animationManager.jump(hangmanImageView);
 
             soundManager.playWin();
-            showVictoryOverlay();
 
-      
-
-overlayInfo.setText(
+            overlayInfo.setText(
         "Score: " + score
 );
 
-showVictoryOverlay();
+            showVictoryOverlay();
 
             saveGameStats(true);
 
@@ -874,17 +856,14 @@ showVictoryOverlay();
 
     soundManager.playLose();
 
-    showGameOverOverlay();
-
-
-overlayInfo.setText(
+    overlayInfo.setText(
         "The Word Was:\n"
         + model.getWordToGuess()
         + "\n\nScore: "
         + score
 );
 
-showGameOverOverlay();
+    showGameOverOverlay();
     saveGameStats(false);
 
 }

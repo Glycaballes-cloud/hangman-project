@@ -74,11 +74,6 @@
             </font>
 
         </Label>
-
-
-
-        <!-- HANGMAN IMAGE -->
-<ImageView fx:id="hangmanImageView" fitHeight="350" fitWidth="300" layoutX="399.0" layoutY="45.0" preserveRatio="true" />
    
    
 
@@ -88,6 +83,11 @@
        <!-- HINT IMAGE BUTTON -->
    
        <ImageView fx:id="hintButtonImage" fitHeight="110" fitWidth="150" layoutX="75.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+
+
+
+        <!-- HANGMAN IMAGE -->
+<ImageView fx:id="hangmanImageView" fitHeight="350" fitWidth="300" layoutX="399.0" layoutY="45.0" preserveRatio="true" />
 
 
 
