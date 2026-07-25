@@ -44,6 +44,7 @@ public class StatisticsController {
     private Button backButton;
 
     private StatsManager statsManager;
+    private final SoundManager soundManager = SoundManager.getInstance();
 
     @FXML
     public void initialize() {
@@ -175,6 +176,7 @@ public class StatisticsController {
      */
     @FXML
     private void goBack() {
+        soundManager.playClick();
 
         try {
 

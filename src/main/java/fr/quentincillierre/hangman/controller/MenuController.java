@@ -52,6 +52,21 @@ private Button exitButton;
 
     @FXML
     private Button startButton;
+    @FXML
+private Button musicButton;
+@FXML
+private void toggleMusic() {
+
+    soundManager.playClick();
+
+    soundManager.toggleBackground();
+
+    if (soundManager.isBackgroundPlaying()) {
+        musicButton.setText("🔊");
+    } else {
+        musicButton.setText("🔇");
+    }
+}
 
     @FXML
 private void openLeaderboard() {
@@ -80,7 +95,7 @@ private void openLeaderboard() {
 
     // Stores the current player
     private static String currentPlayerName = "Guest";
-    private final SoundManager soundManager = new SoundManager();
+    private final SoundManager soundManager = SoundManager.getInstance();
 
 
 
@@ -110,6 +125,13 @@ public void initialize() {
     difficultyComboBox.setValue("Medium");
 
     soundManager.playBackground();
+    if (soundManager.isBackgroundPlaying()) {
+    musicButton.setText("🔊");
+} else {
+    musicButton.setText("🔇");
+}
+
+addHoverEffect(musicButton);
 
     // Typing effect when entering player name
     playerNameField.textProperty().addListener((observable, oldValue, newValue) -> {

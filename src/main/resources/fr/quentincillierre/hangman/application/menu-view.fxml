@@ -72,5 +72,23 @@
 
           <!-- Title -->
     <ImageView fx:id="titleImage" fitHeight="188.0" fitWidth="527.0" layoutX="528.0" layoutY="-10.0" preserveRatio="true" />
+    <Button fx:id="musicButton"
+        layoutX="1220.0"
+        layoutY="20.0"
+        onAction="#toggleMusic"
+        prefHeight="55.0"
+        prefWidth="55.0"
+        text="🔊"
+        style="
+            -fx-background-color: linear-gradient(#D8903C,#A65C1B);
+            -fx-text-fill:white;
+            -fx-font-size:22;
+            -fx-font-family:'Rockwell';
+            -fx-font-weight:bold;
+            -fx-background-radius:30;
+            -fx-border-radius:30;
+            -fx-border-color:#5D3412;
+            -fx-border-width:3;
+            -fx-cursor:hand;" />
 
 </AnchorPane>
