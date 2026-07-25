@@ -88,33 +88,59 @@ private void openLeaderboard() {
     // Initialize
     // ===========================================
 
-    @FXML
-    public void initialize() {  
+@FXML
+public void initialize() {
 
-        addHoverEffect(startButton);
-        addHoverEffect(leaderboardButton);
-addHoverEffect(statisticsButton);
-addHoverEffect(exitButton);
+    addHoverEffect(startButton);
+    addHoverEffect(leaderboardButton);
+    addHoverEffect(statisticsButton);
+    addHoverEffect(exitButton);
 
-        loadImage(
-                backgroundImage,
-                "/pictures/background.png"
+    loadImage(
+            backgroundImage,
+            "/pictures/background.png"
+    );
+
+    loadImage(
+            titleImage,
+            "/pictures/hangman-title.png"
+    );
+
+    categoryComboBox.setValue("Random");
+    difficultyComboBox.setValue("Medium");
+
+    soundManager.playBackground();
+
+    // Typing effect when entering player name
+    playerNameField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+        // Remove the red border if the player starts typing
+        if (!newValue.trim().isEmpty()) {
+            playerNameField.setStyle("");
+        }
+
+        // Small pop animation
+        ScaleTransition scale = new ScaleTransition(
+                Duration.millis(120),
+                playerNameField
         );
 
-        loadImage(
-                titleImage,
-                "/pictures/hangman-title.png"
-        );
+        scale.setFromX(1.0);
+        scale.setFromY(1.0);
+        scale.setToX(1.05);
+        scale.setToY(1.05);
+        scale.setCycleCount(2);
+        scale.setAutoReverse(true);
 
+        scale.play();
 
-        categoryComboBox.setValue("Random");
+        // Optional typing sound
+        // soundManager.playType();
+    });
 
-        difficultyComboBox.setValue("Medium");
-        soundManager.playBackground();
+}
 
-    }
-
-    private void addHoverEffect(Button button) {
+private void addHoverEffect(Button button) {
 
     button.setCursor(Cursor.HAND);
 
@@ -145,7 +171,6 @@ addHoverEffect(exitButton);
     });
 
 }
-
 
     // ===========================================
     // Exit Game
@@ -214,65 +239,66 @@ addHoverEffect(exitButton);
     // ===========================================
  
     @FXML
-    private void startGame() {
-        soundManager.playClick();
+private void startGame() {
 
+    soundManager.playClick();
 
-        try {
+    String playerName = playerNameField.getText().trim();
 
+    // Check if the player entered a name
+    if (playerName.isEmpty()) {
 
-            // Save player name
-            currentPlayerName = getPlayerName();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Sheriff's Notice");
+        alert.setHeaderText("Howdy, Stranger!");
+        alert.setContentText("Please enter your cowboy name before starting the game.");
 
+        // Apply your CSS
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/style.css").toExternalForm()
+        );
 
+        alert.showAndWait();
 
-            FXMLLoader loader =
-                    new FXMLLoader(
-                    getClass().getResource(
-                    "/fr/quentincillierre/hangman/application/game-view.fxml")
-                    );
+        // Highlight the field
+        playerNameField.setStyle("""
+                -fx-border-color: red;
+                -fx-border-width: 3;
+                -fx-border-radius: 8;
+                """);
 
-
-            Parent root =
-                    loader.load();
-
-
-
-            GameController controller =
-                    loader.getController();
-
-
-
-            controller.setPlayerName(
-                    currentPlayerName
-            );
-
-
-            controller.setCategory(
-                    getSelectedCategory()
-            );
-
-
-            controller.setDifficulty(
-                    getSelectedDifficulty()
-            );
-
-
-            controller.startGame();
-
-
-
-            changeScene(root);
-
-
-
-        } catch(Exception e) {
-
-            e.printStackTrace();
-
-        }
-
+        playerNameField.requestFocus();
+        return;
     }
+
+    // Remove red border if the name is valid
+    playerNameField.setStyle("");
+
+    currentPlayerName = playerName;
+
+    try {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(
+                        "/fr/quentincillierre/hangman/application/game-view.fxml"));
+
+        Parent root = loader.load();
+
+        GameController controller = loader.getController();
+
+        controller.setPlayerName(currentPlayerName);
+        controller.setCategory(getSelectedCategory());
+        controller.setDifficulty(getSelectedDifficulty());
+
+        controller.startGame();
+
+        changeScene(root);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
 
 
