@@ -21,7 +21,7 @@ Players can choose different categories and difficulty levels, use a hint when n
 - Allows users to compare their performance with other players.
 
 ### 📊 Player Statistics
-- Displays player performance records.
+- Displays Tops player performance records.
 - Shows which player has the highest number of correctly guessed words.
 - Helps track game progress and achievements.
 
@@ -51,7 +51,6 @@ Different difficulty levels provide varying word complexities and challenges.
 
 ### ❌ Wrong Guess Tracker
 - Displays all incorrectly guessed letters.
-- Helps players avoid repeating the same mistakes.
 - Improves the overall user experience.
 
 ### 💡 Hint System
