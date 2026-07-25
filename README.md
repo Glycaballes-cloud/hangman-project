@@ -64,7 +64,6 @@ Different difficulty levels provide varying word complexities and challenges.
 
 - Java
 - Java Swing / Java GUI Components
-- Object-Oriented Programming (OOP)
 - File Handling (for Leaderboard and Statistics Storage)
 
 ---
