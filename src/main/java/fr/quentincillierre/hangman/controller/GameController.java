@@ -191,7 +191,7 @@ private void addHoverEffect(ImageView image) {
 @FXML
 public void initialize() {
 
-    soundManager = new SoundManager();
+    soundManager = SoundManager.getInstance();
 
     addHoverEffect(pauseButtonImage);
     addHoverEffect(quitButtonImage);

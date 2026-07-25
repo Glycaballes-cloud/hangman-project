@@ -48,10 +48,11 @@ private TableColumn<LeaderboardEntry, Integer> gamesColumn;
 
 @FXML
 private TableColumn<LeaderboardEntry, Integer> winRateColumn;
+private final SoundManager soundManager = SoundManager.getInstance();
 
 @FXML
 private void goBack() {
-
+        soundManager.playClick();
     try {
 
         FXMLLoader loader =

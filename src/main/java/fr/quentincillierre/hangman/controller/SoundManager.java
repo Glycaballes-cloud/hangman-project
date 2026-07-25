@@ -5,7 +5,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class SoundManager {
-
+    private static final SoundManager INSTANCE = new SoundManager();
+           public static SoundManager getInstance() {
+    return INSTANCE;
+}
     private MediaPlayer backgroundMusic;
 
     private final AudioClip hover;
@@ -17,7 +20,8 @@ public class SoundManager {
     private final AudioClip timer;
     private final AudioClip pause;
 
-    public SoundManager() {
+    private SoundManager() {
+        
 
         hover = loadClip("/sounds/hover.wav");
         click = loadClip("/sounds/click.wav");
